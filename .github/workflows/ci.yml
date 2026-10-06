@@ -100,13 +100,17 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v7
-        
+
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '21'
           cache: maven
+      - name: Setup Maven
+        uses: stCarolas/setup-maven@v5
+        with:
+          maven-version: 3.8.2
 
       - name: Build
         run: ./mvnw clean package
