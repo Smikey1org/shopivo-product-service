@@ -42,6 +42,7 @@ jobs:
             --redact \
             --exit-code 1
       - name: Upload Gitleaks Report
+        if: always()
         uses: actions/upload-artifact@v7
         with:
           name: gitleaks-report
@@ -84,6 +85,7 @@ jobs:
         # checkov:skip=CKV_DOCKER_2:Healthcheck is managed by the deployment platform
 
       - name: Upload Checkov Reports
+        if: always()
         uses: actions/upload-artifact@v7
         with:
           name: checkov-reports
@@ -128,12 +130,14 @@ jobs:
           --output trivy-fs-report.json \
           --exit-code 1
       - name: Generate CycloneDX SBOM
+        if: always()
         run: |
           trivy fs . \
             --format cyclonedx \
             --output trivy-fs-sbom-cyclonedx.json \
             --exit-code 0
       - name: Upload Trivy Reports
+        if: always()
         uses: actions/upload-artifact@v7
         with:
           name: trivy-fs-report
