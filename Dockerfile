@@ -17,7 +17,7 @@ RUN --mount=type=cache,target=/root/.m2 \
 #3: mvn dependency:go-offline means: 
     # This asks Maven to download dependencies required for the project 
     #ahead of the actual build.
-
+COPY config ./config
 COPY src ./src
 RUN --mount=type=cache,target=/root/.m2 \
     mvn -B -DskipTests package
