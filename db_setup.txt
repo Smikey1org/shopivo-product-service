@@ -1,0 +1,15 @@
+CREATE USER product_user WITH PASSWORD 'product_123';
+CREATE DATABASE product OWNER product_user;
+ALTER ROLE product_user CREATEDB;
+
+docker run -dit \
+  --name shopivo-product \
+  --network shopivo-network \
+  -e DB_HOST=shopivo-postgres \
+  -e DB_PORT=5432 \
+  -e DB_USER=product_user \
+  -e DB_PASSWORD=product_123 \
+  -e DB_NAME=product \
+  -p 5002:5002 \
+  product-service:latest
+
