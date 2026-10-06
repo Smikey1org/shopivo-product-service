@@ -113,7 +113,7 @@ jobs:
           maven-version: 3.8.2
 
       - name: Build
-        run: ./mvnw clean package
+        run: mvn clean package
       - name: Steup trivy
         uses: aquasecurity/setup-trivy@v0.3.1
         with:
