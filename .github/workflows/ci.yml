@@ -102,6 +102,16 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v7
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Build
+        run: mvn clean package
+        
       - name: Steup trivy
         uses: aquasecurity/setup-trivy@v0.3.1
         with:
