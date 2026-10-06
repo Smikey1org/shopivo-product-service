@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.5.16</version>
+    <version>4.1.1</version>
   </parent>
 
   <groupId>com.shopivo</groupId>
@@ -17,7 +17,7 @@
     <java.version>21</java.version>
     <!-- Security overrides -->
     <tomcat.version>11.0.25</tomcat.version>
-    <jackson-bom.version>2.21.7</jackson-bom.version>
+    <jackson-bom.version>3.2.3</jackson-bom.version>
     <rabbit-amqp-client.version>5.34.0</rabbit-amqp-client.version>
     <netty.version>4.1.137.Final</netty.version>
 
@@ -82,6 +82,7 @@
         <executions>
           <execution>
           <!-- 1. validate — "Is the Maven project structurally valid?" -->
+            <id>checkstyle-check</id>
             <phase>validate</phase>
             <goals>
             <!-- 2. Checkstyle — "Does the code follow our coding rules?" -->

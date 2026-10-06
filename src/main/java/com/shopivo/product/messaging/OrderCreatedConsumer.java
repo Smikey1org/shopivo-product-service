@@ -1,6 +1,6 @@
 package com.shopivo.product.messaging;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.ObjectMapper;
 import com.shopivo.product.repository.ProductRepository;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
@@ -17,13 +17,11 @@ public class OrderCreatedConsumer {
 
     @RabbitListener(queues = "product.order.created")
     public void consume(String message) throws Exception {
-        OrderCreatedEvent event =
-            mapper.readValue(message, OrderCreatedEvent.class);
+        OrderCreatedEvent event = mapper.readValue(message, OrderCreatedEvent.class);
 
         for (var item : event.items()) {
             repository.findById(item.productId()).ifPresent(product -> {
-                int newStock =
-                    Math.max(0, product.getStock() - item.quantity());
+                int newStock = Math.max(0, product.getStock() - item.quantity());
 
                 product.setStock(newStock);
                 repository.save(product);
